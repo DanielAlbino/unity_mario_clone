@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D myBody;
     private Animator anim;
+    public Transform groundCheckPosition;
+    public LayerMask groundLayer;
 
     void Awake()
     {
@@ -25,7 +27,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      if(Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.5f, groundLayer))
+        {
+            
+        }  
     }
     void FixedUpdate()
     {
@@ -38,13 +43,25 @@ public class PlayerMovement : MonoBehaviour
         if(h > 0)
         {
             myBody.velocity = new Vector2(speed, myBody.velocity.y);
+            ChangeDirection(1);
         } else if(h < 0)
         {
             myBody.velocity = new Vector2(-speed, myBody.velocity.y);
+            ChangeDirection(-1);
         } else
         {
             myBody.velocity = new Vector2(0f, myBody.velocity.y);
         }
+
+        anim.SetInteger("Speed", Mathf.Abs((int)myBody.velocity.x));
     }
+
+    void ChangeDirection(int direction)
+    {
+        Vector2 tempScale = transform.localScale;
+        tempScale.x = direction;
+        transform.localScale = tempScale;
+    }
+
 
 }// class
