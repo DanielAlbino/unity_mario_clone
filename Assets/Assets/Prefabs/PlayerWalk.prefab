@@ -197,3 +197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   groundCheckPosition: {fileID: 1071689530}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
