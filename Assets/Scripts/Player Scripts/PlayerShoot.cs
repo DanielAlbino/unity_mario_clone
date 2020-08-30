@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject fireBullet;
+
+   void Update()
     {
-        
+        ShootBullet();
+    }
+    void ShootBullet()
+    {
+        if (Input.GetKeyDown(KeyCode.X)){
+            GameObject bullet = Instantiate(fireBullet, transform.position, Quaternion.identity);
+            bullet.GetComponent<FireBullet>().Speed *= transform.localScale.x;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+}// class
